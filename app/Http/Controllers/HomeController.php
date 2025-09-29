@@ -7,7 +7,7 @@ use App\Models\CarFeatures;
 use App\Models\CarImage;
 use App\Models\CarType;
 use App\Models\Maker;
-use App\Models\Model;
+use App\Models\CarModel;
 use App\Models\User;
 use App\Models\FuelType;
 use Illuminate\Database\Eloquent\Factories\Sequence;
@@ -269,10 +269,10 @@ class HomeController extends Controller
         // Maker::factory()
         // ->count(1)
         // // ->hasModels(5)
-        // ->has(Model::factory()->count(3))
+        // ->has(CarModel::factory()->count(3))
         // ->create();
 
-        // Model::factory()
+        // CarModel::factory()
         // ->count(5)
         // // ->forMaker(['name'=>"Lexus"])
         // ->for(Maker::factory()->state(['name' => 'Lexus']))
@@ -283,6 +283,17 @@ class HomeController extends Controller
         // // ->hasAttached(Car::factory()->count(5), ['col1' => 'va'] ,'favouriteCars')
         // ->create();
 
-        return view(view: 'home/index');
+        // $cars = Car::where('published_at', '<', now())
+        // ->orderBy('published_at', 'desc')
+        // ->limit(30)
+        // ->get();
+
+        $cars = Car::where('published_at', '<', now())
+        ->with(['primaryImage', 'city', 'maker', 'carModel', 'carType', 'fuelType'])
+        ->orderBy('published_at', 'desc')
+        ->limit(30)
+        ->get();
+
+        return view('home/index', ['cars' => $cars]);
     }
 }

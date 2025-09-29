@@ -19,7 +19,7 @@
                 </select>
               </div>
               <div>
-                <select id="modelSelect" name="model_id">
+                <select id="modelSelect" name="car_model_id">
                   <option value="" style="display: block">Model</option>
                   <option value="50" data-parent="5" style="display: none">
                     370Z

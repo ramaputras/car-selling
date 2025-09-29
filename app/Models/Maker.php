@@ -21,8 +21,8 @@ class Maker extends EloquentModel
         return $this->hasMany(Car::class);
     }
 
-    public function models(){
-        return $this->hasMany(related: Model::class);
+    public function carModels(){
+        return $this->hasMany(related: CarModel::class);
     }
 
     protected static function newFactory(){

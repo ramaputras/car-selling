@@ -7,7 +7,7 @@ use App\Models\State;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use App\Models\City;
 use App\Models\Maker;
-use App\Models\Model;
+use App\Models\CarModel;
 use App\Models\CarType;
 use App\Models\Car;
 use App\Models\CarImage;
@@ -81,13 +81,13 @@ class DatabaseSeeder extends Seeder
             "Kia" => ["Sorento", "Telluride", "Sportage", "K5", "Forte"],
         ];
 
-        foreach($makers as $maker => $models){
+        foreach($makers as $maker => $carModels){
             Maker::factory()
             ->state(["name" => $maker])
             ->has(
-                Model::factory()
-                ->count(count($models))
-                ->sequence(...array_map(fn($model)=> ["name" => $model], $models))
+                CarModel::factory()
+                ->count(count($carModels))
+                ->sequence(...array_map(fn($model)=> ["name" => $model], $carModels))
                 )
             ->create();
         }

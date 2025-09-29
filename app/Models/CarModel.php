@@ -3,14 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Database\Factories\ModelFactory;
-use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Illuminate\Database\Eloquent\Model;
 
-class Model extends EloquentModel
+class CarModel extends Model
 {
     //
     use HasFactory;
     public $timestamps = false;
+
+    protected $table = "car_models";
 
     protected $fillable = [
         'name',
@@ -23,9 +24,5 @@ class Model extends EloquentModel
 
     public function maker(){
         return $this->belongsTo(Maker::class);
-    }
-
-    protected static function newFactory(){
-        return ModelFactory::new();
     }
 }
